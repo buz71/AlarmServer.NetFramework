@@ -41,7 +41,7 @@ namespace AlertServerHelper
     {
         public static void WriteLog(string path) 
         {
-            File.AppendAllText(path, $"Program detected STOP at {DateTime.Now}\n");
+            File.WriteAllText(path, $"Program detected STOP at {DateTime.Now}\n");
         }
     }
 }
