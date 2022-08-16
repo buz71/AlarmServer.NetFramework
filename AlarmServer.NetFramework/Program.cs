@@ -20,7 +20,11 @@ namespace AlertServerHelper
                 {
                     ForegroundColor = ConsoleColor.Red;
                     WriteLine("Alert Server STOP");
-                    Logger.WriteLog("Logger.txt");
+                    if (!Logger.StopDetected)
+                    {
+                        Logger.StopDetected = true;
+                        Logger.WriteLog("Logger.txt");
+                    }
                     ResetColor();
                     // Process.Start(@"C:\PROCON-WIN\AlertService.exe");
                 }
@@ -39,6 +43,7 @@ namespace AlertServerHelper
 
     public static class Logger 
     {
+        public static bool StopDetected = false;
         public static void WriteLog(string path) 
         {
             File.WriteAllText(path, $"Program detected STOP at {DateTime.Now}\n");
